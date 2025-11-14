@@ -1,31 +1,34 @@
-# Odoo 17 – HR Custom Module (Employee Grade, Employee Records & Basic HR Enhancements)
+# Odoo 17 – Advanced HR Custom Module
 
 ## 📌 Project Overview
 
-This project is a **custom Odoo 17 HR module** designed to enhance the Human Resources capabilities by adding new fields, improving employee data structure, and preparing the system for further HR features.  
-The goal of this project is to simulate a **real-world Odoo development environment**, following professional development practices including models, views, security rules, and module structure.
+This project is a **custom Odoo 17 HR module** named hr_custom_advanced, designed to enhance employee management by adding new employee information fields, improving the HR data structure, and extending the employee form view with additional pages.
+
+The module simulates **real-world Odoo development**, using proper structure, view inheritance, access rights, and clean Python/XML code.
 
 ---
 
 ## 📁 Module Name
 
-`hr_employee_grade`
+`hr_custom_advanced`
 
 ---
 
 ## 🚀 Features Implemented
 
-### 1️⃣ Added a New Field: Employee Grade
+### 1️⃣ Added New HR Fields
 
-- Created a new field `grade` inside the employee model `hr.employee`.
-- The field stores the employee’s job grade/level.
+#### Extended the hr.employee model with three new fields:
+
+- Created new fields `personal_code`, `emergency_contact`, `iqama_number` inside the employee model `hr.employee`.
+- These fields were added via model inheritance in Python.
 - Implemented using `fields.Char()`.
 
-### 2️⃣ Enhanced Employee Profile Form
+### 2️⃣ Extended Employee Form View
 
-- Modified the employee form view to show the new **Employee Grade** field.
-- Added the field inside the _HR Settings_ tab.
-- Ensured seamless integration with native Odoo UI.
+- Added a new page named "Extra Info" inside the Employee form (hr.employee).
+- Displayed all newly added fields inside a structured group.
+- Used proper inherit_id and xpath replacement principles.
 
 ### 3️⃣ Module Initialization
 
@@ -76,16 +79,26 @@ hr_employee_grade/
 
 ## 🔧 Technical Details
 
-### Employee Grade Field
+### Employee Fields
 
 ```python
-grade = fields.Char()
+personal_code = fields.Char()
+emergency_contact = fields.Char()
+iqama_number = fields.Char()
 ```
 
 ### View Inheritance
 
 ```xml
-<field name="grade"/>
+<notebook position="inside">
+    <page string="Extra Info">
+        <group>
+            <field name="personal_code"/>
+            <field name="emergency_contact"/>
+            <field name="iqama_number"/>
+        </group>
+    </page>
+</notebook>
 ```
 
 ### Model Extension
@@ -103,16 +116,20 @@ class Employee(models.Model):
 2. Restart the Odoo server.
 3. Activate **Developer Mode**.
 4. Go to **Apps** → Update Apps List.
-5. Search for **HR Employee Grade** and install.
+5. Search for **HR Custom Advanced** and install.
 
 ---
 
-## 📄 Future Enhancements (Next Tasks)
+## 📄 Future Enhancements
 
-- Employee promotion history.
-- Grade salary rules.
-- Approval workflow for grade changes.
-- Reporting dashboard for HR managers.
+This module is designed to grow. Planned enhancements:
+
+- Employee family information model
+- Iqama expiry reminder automation
+- Emergency contact validation
+- Employee documents management
+- Custom HR reports
+- Full HR Dashboard
 
 ---
 
