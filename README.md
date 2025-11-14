@@ -67,7 +67,8 @@ hr_employee_grade/
 │   └── hr_employee_views.xml
 │
 ├── __init__.py
-├── __manifest__.py
+│
+└──__manifest__.py
 
 ```
 
