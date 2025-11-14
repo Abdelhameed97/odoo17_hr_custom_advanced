@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_employee_form_inherit_custom" model="ir.ui.view">
+        <field name="name">hr.employee.view.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page string="Extra Info">
+                    <group>
+                        <field name="personal_code"/>
+                        <field name="emergency_contact"/>
+                        <field name="iqama_number"/>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>
