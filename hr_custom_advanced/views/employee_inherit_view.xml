@@ -4,6 +4,20 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form" />
         <field name="arch" type="xml">
+
+            <xpath expr="//header" position="inside">
+                <button
+                        name="%(open_view_employee_family_members_list)d"
+                        type="action"
+                        string="Family Members"
+                        icon="fa-users"
+                        class="oe_stat_button"
+                        context="{'search_default_employee_id': active_id}"
+                >
+                    <field name="id" invisible="1"/>
+                </button>
+            </xpath>
+
             <notebook position="inside">
                 <page string="Extra Info">
                     <group>
@@ -13,6 +27,30 @@
                     </group>
                 </page>
             </notebook>
+
+            <!-- Add new page inside notebook -->
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Family Information">
+                    <field name="family_member_ids" widget="one2many_list">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="relation"/>
+                            <field name="phone"/>
+                        </tree>
+
+                        <form>
+                           <group>
+                                <field name="name"/>
+                                <field name="relation"/>
+                                <field name="phone"/>
+                           </group>
+                        </form>
+
+                    </field>
+                </page>
+            </xpath>
+
         </field>
     </record>
 </odoo>

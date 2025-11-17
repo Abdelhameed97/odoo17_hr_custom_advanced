@@ -6,7 +6,8 @@
     'depends': ['hr'],
     'data': [
         'security/ir.model.access.csv',
-        'views/employee_inherit_view.xml'
+        'views/employee_inherit_view.xml',
+        'views/family_view.xml'
     ],
     'installable': True,
     'application': False,

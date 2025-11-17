@@ -1,0 +1,152 @@
+<odoo>
+
+    <record id="view_employee_family_members_list" model="ir.ui.view">
+        <field name="name">view.employee.family.members.list</field>
+        <field name="model">hr.employee.family</field>
+        <field name="arch" type="xml">
+            <tree default_order="name asc">
+                <field name="name" />
+                <field name="relation" />
+                <field name="phone" />
+                <field name="employee_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_employee_family_members_kanban" model="ir.ui.view">
+        <field name="name">View Family Kanban</field>
+        <field name="model">hr.employee.family</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_family_card">
+
+                <!-- CSS HERE -->
+                <style>
+                    .family_card {
+                        border-radius: 10px;
+                        padding: 12px;
+                        background: white;
+                        box-shadow: 0px 2px 6px rgba(0,0,0,0.15);
+                        border: 1px solid #e0e0e0;
+                        transition: 0.2s;
+                        margin: 5px;
+                    }
+                    .family_card:hover {
+                        box-shadow: 0px 4px 10px rgba(0,0,0,0.25);
+                    }
+                    .family_header {
+                        font-size: 18px;
+                        font-weight: 600;
+                        margin-bottom: 10px;
+                        color: #333;
+                    }
+                    .family_row {
+                        display: flex;
+                        align-items: center;
+                        gap: 7px;
+                        padding: 3px 0;
+                        font-size: 14px;
+                    }
+                    .family_row i {
+                        width: 16px;
+                        text-align: center;
+                    }
+                </style>
+
+                <field name="name"/>
+                <field name="relation"/>
+                <field name="phone"/>
+                <field name="employee_id"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+
+                        <div class="o_kanban_record family_card">
+
+<!--                            <div class="family_header">-->
+<!--                                <span class="family_name" t-esc="record.name.raw_value or ''"/>-->
+<!--                            </div>-->
+
+                            <div class="family_body">
+
+                                <div class="family_row">
+                                    <span class="family_name" t-esc="record.name.raw_value or ''"/>
+                                </div>
+
+                                <div class="family_row">
+                                    <i class="fa fa-user text-primary"> </i>
+                                    <span t-esc="record.relation.raw_value or ''"/>
+                                </div>
+
+                                <div class="family_row">
+                                    <i class="fa fa-phone text-success"> </i>
+                                    <span t-esc="record.phone.raw_value or ''"/>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+    <record id="view_employee_family_members_form" model="ir.ui.view">
+        <field name="name">view.employee.family.members.form</field>
+        <field name="model">hr.employee.family</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+
+                    <div class="oe-title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="General Info">
+                            <field name="employee_id" />
+                            <field name="phone" />
+                        </group>
+                        <group string="Additional Info">
+                            <field name="relation" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_employee_family_members_search" model="ir.ui.view">
+        <field name="name">view.employee.family.members.search</field>
+        <field name="model">hr.employee.family</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="relation" />
+                <field name="phone" />
+                <field name="employee_id" />
+
+                <filter name="group_employee" string="Group Employee" domain="[]" context="{'group_by': 'employee_id'}" />
+                <filter name="group_relation" string="Group Relation" domain="[]" context="{'group_by': 'relation'}" />
+            </search>
+        </field>
+    </record>
+
+    <record id="open_view_employee_family_members_list" model="ir.actions.act_window">
+        <field name="name">Employee Family Member</field>
+        <field name="res_model">hr.employee.family</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_hr_employee_family_members"
+        name="Family Members"
+        action="open_view_employee_family_members_list"
+        parent="hr.menu_hr_employee_payroll"
+        sequence="1"
+    />
+</odoo>
